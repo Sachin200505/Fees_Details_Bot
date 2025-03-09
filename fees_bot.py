@@ -1,6 +1,7 @@
 import sqlite3
 import random
 import logging
+from telegram import Bot
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
 
@@ -107,12 +108,14 @@ async def error_handler(update: object, context: object) -> None:
 def main():
     """🚀 Main function to run the bot"""
     create_database()
+    bot = Bot(token="YOUR_BOT_TOKEN")
     app = Application.builder().token(TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     app.add_error_handler(error_handler)
     logging.info("Bot is running...")
     app.run_polling()
+
 
 if __name__ == "__main__":
     main()
