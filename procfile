@@ -1,0 +1,1 @@
+worker: python3 fees_bot.py
